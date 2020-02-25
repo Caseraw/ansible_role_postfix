@@ -7,7 +7,7 @@ role_postfix_required_packages:
 role_postfix_remote_path_main_cf: /etc/postfix/main.cf
 
 ### Setting up the /etc/postfix/main.cf file.
-## This list builds up the configuration file. It is primarily tied to the 
+## This list builds up the configuration file. It is primarily tied to the
 ## templates/main.cf.j2 template file.
 ##
 ## Parameters may contain free text values. No specific parsing of values takes

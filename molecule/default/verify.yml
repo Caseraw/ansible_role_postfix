@@ -1,9 +1,36 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
+  become: True
+  gather_facts: False
+  vars_files:
+    - ../../defaults/main.yml
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: Gather package facts
+      package_facts:
+        manager: auto
+
+    - name: Gather service facts
+      service_facts:
+
+    - name: Ensure postfix is installed
+      fail:
+        msg: Package 'postfix' is not installed
+      when: "'postfix' not in ansible_facts.packages"
+
+    - name: Ensure postfix service is enabled and running
+      fail:
+        msg: Service 'postfix' is not running and/or enabled
+      when:
+        - ansible_facts.services["postfix.service"].state != "running"
+        - ansible_facts.services["postfix.service"].status != "enabled"
+
+    - name: Ensure chrony configuration file exists
+      file:
+        path: '{{ role_postfix_remote_path_main_cf }}'
+        owner: root
+        group: root
+        mode: '0644'
+      check_mode: True
+
+...
