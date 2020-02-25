@@ -1,0 +1,17 @@
+---
+- name: Ensure postfix is installed
+  package:
+    name: '{{ role_postfix_required_packages }}'
+    state: present
+  notify: start_restart_postfix
+
+- name: Deploy postfix configuration file
+  template:
+    src: main.cf.j2
+    dest: '{{ role_postfix_remote_path_main_cf }}'
+    owner: root
+    group: root
+    mode: '0644'
+  notify: start_restart_postfix
+
+...

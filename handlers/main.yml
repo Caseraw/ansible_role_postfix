@@ -1,0 +1,11 @@
+---
+- name: Ensure postfix is started/restarted and enabled
+  systemd:
+    name: postfix
+    state: restarted
+    enabled: True
+    masked: False
+    daemon_reload: True
+  listen: start_restart_postfix
+
+...

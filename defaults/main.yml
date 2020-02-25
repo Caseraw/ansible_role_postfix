@@ -1,0 +1,58 @@
+---
+### Software packages required for installing postfix.
+role_postfix_required_packages:
+  - postfix
+
+### Paths to the remote configuration files.
+role_postfix_remote_path_main_cf: /etc/postfix/main.cf
+
+### Setting up the /etc/postfix/main.cf file.
+## This list builds up the configuration file. It is primarily tied to the 
+## templates/main.cf.j2 template file.
+##
+## Parameters may contain free text values. No specific parsing of values takes
+## place due to the fact that if it would increase the complexity of the
+## Ansible role as will it's maintainability. It is strongly advised to consult
+## the official and latest documentation in order to prevent unintended
+## misconfiguration. Make sure to test your setup and verify a correct working
+## set. The given defaults are part of a minimal, stable and recommended set
+## of configuration parameters.
+##
+## Man pages:
+## http://www.postfix.org/postfix-manuals.html
+
+role_postfix_main_dot_cf_parameters:
+  - 'queue_directory = /var/spool/postfix'
+  - 'command_directory = /usr/sbin'
+  - 'daemon_directory = /usr/libexec/postfix'
+  - 'data_directory = /var/lib/postfix'
+  - 'mail_owner = postfix'
+  - 'inet_interfaces = loopback-only'
+  - 'inet_protocols = ipv4'
+  - 'myhostname = {{ ansible_fqdn }}'
+  - 'mynetworks = 127.0.0.0/8'
+  - 'mynetworks_style = host'
+  - 'myorigin = $myhostname'
+  - 'mydomain = $myorigin'
+  - 'mydestination = '
+  - 'relayhost = '
+  - 'local_transport = error: local delivery disabled'
+  - 'smtp_host_lookup = native'
+  - 'smtp_tls_protocols = TLSv1.2'
+  - 'smtp_tls_security_level = may'
+  - 'smtpd_banner = $myhostname ESMTP'
+  - 'unknown_local_recipient_reject_code = 550'
+  - 'alias_maps = hash:/etc/aliases'
+  - 'alias_database = hash:/etc/aliases'
+  - 'debug_peer_level = 2'
+  - 'debugger_command = PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5'
+  - 'sendmail_path = /usr/sbin/sendmail.postfix'
+  - 'newaliases_path = /usr/bin/newaliases.postfix'
+  - 'mailq_path = /usr/bin/mailq.postfix'
+  - 'setgid_group = postdrop'
+  - 'html_directory = no'
+  - 'manpage_directory = /usr/share/man'
+  - 'sample_directory = /usr/share/doc/postfix-2.10.1/samples'
+  - 'readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES'
+
+...
