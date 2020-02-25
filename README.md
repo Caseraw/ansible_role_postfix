@@ -2,6 +2,8 @@
 
 Managing postfix.
 
+[![Build Status](https://travis-ci.org/Caseraw/ansible_role_postfix.svg?branch=master)](https://travis-ci.org/Caseraw/ansible_role_postfix) [<img src="https://img.shields.io/ansible/role/46849">](https://galaxy.ansible.com/caseraw/ansible_role_postfix) [<img src="https://img.shields.io/ansible/role/d/46849">](https://galaxy.ansible.com/caseraw/ansible_role_postfix) [<img src="https://img.shields.io/ansible/quality/46849">](https://galaxy.ansible.com/caseraw/ansible_role_postfix)
+
 - [Ansible role postfix](#ansible-role-postfix)
   - [License](#license)
   - [Author Information](#author-information)
