@@ -24,7 +24,7 @@ role_postfix_remote_path_main_cf: /etc/postfix/main.cf
 role_postfix_main_dot_cf_parameters:
   - 'inet_interfaces = loopback-only'
   - 'inet_protocols = all'
-  - 'mydomain = {{ ansible_domain }}'
+  - 'mydomain = example.com'
   - 'myhostname = {{ ansible_fqdn }}'
   - 'mynetworks = 127.0.0.0/8'
   - 'myorigin = $mydomain'
