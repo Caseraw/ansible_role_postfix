@@ -64,8 +64,24 @@ Compatible with the following list of operating systems:
 - name: Manage postfix
   become: True
   gather_facts: False
-  roles:
-   - role: ansible_role_postfix
+  tasks:
+    - import_role:
+        name: ansible_role_postfix
+      vars:
+      role_postfix_main_dot_cf_parameters:
+        - 'inet_interfaces = loopback-only'
+        - 'inet_protocols = all'
+        - 'mydomain = {{ ansible_domain }}'
+        - 'myhostname = {{ ansible_fqdn }}'
+        - 'mynetworks = 127.0.0.0/8'
+        - 'myorigin = $mydomain'
+        - 'mydestination = '
+        - 'relayhost = [relayhost.example.com]'
+        - 'local_transport = error: local delivery disabled'
+        - 'smtp_host_lookup = dns, native'
+        - 'smtp_tls_security_level = may'
+        - 'smtpd_banner = $myhostname ESMTP'
+        - 'debugger_command = PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5'
 
 ...
 ```
@@ -79,7 +95,7 @@ postfix status
 
 ## Additional documentation resources
 
-N/A
+<www.postfix.org/postconf.5.html>
 
 ## Testing with Molecule
 
